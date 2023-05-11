@@ -1,3 +1,4 @@
+import axios from "axios";
 const Header = (baslik, tarih, yazi) => {
   // GÖREV 1
   // ---------------------
@@ -11,6 +12,25 @@ const Header = (baslik, tarih, yazi) => {
   //    <span class="temp">{ yazi }</span>
   //  </div>
   //
+
+  const divItem = document.createElement("div");
+  divItem.setAttribute("class","header");
+
+  const dateSpan = document.createElement("span");
+  dateSpan.setAttribute("class", "date");
+  dateSpan.textContent = `${tarih}`
+  divItem.append(dateSpan);
+
+  const h1Baslik = document.createElement("h1");
+  h1Baslik.textContent = `${baslik}`;
+  divItem.append(h1Baslik);
+
+  const tempSpan = document.createElement("span");
+  tempSpan.setAttribute("class", "temp");
+  tempSpan.textContent = `${yazi}`
+  divItem.append(tempSpan);
+
+  return divItem;
 }
 
 const headerEkleyici = (secici) => {
@@ -23,6 +43,10 @@ const headerEkleyici = (secici) => {
 
   // İPUCU: querySelector bir string alabilir (bknz: querySelector("#wrapper")) 
   // fakat aynı zamanda bir değişken de alabilir (bknz: querySelector(secici))
+
+  document
+  .querySelector(secici)
+  .append(Header('Teknoloji Zamanı', '11 Kasım 2022', 'sağdaki yazı'));
  
 }
 

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const Tablar = (konu) => {
   // GÖREV 3
   // ---------------------
@@ -13,9 +15,29 @@ const Tablar = (konu) => {
   //   <div class="tab">teknoloji</div>
   // </div>
   //
+
+  const topicsDiv = document.createElement("div");
+  topicsDiv.setAttribute("class", "topics");
+
+  const jsDiv = document.createElement("div");
+  jsDiv.setAttribute("class","tab");
+  jsDiv.textContent = "javascript";
+  topicsDiv.append(jsDiv);
+
+  const bsDiv = document.createElement("div");
+  bsDiv.setAttribute("class","tab");
+  bsDiv.textContent = "bootstrap";
+  topicsDiv.append(bsDiv);
+
+  const teknoDiv = document.createElement("div");
+  teknoDiv.setAttribute("class","tab");
+  teknoDiv.textContent = "teknoloji";
+  topicsDiv.append(teknoDiv);
+
+  return topicsDiv;
 }
 
-const tabEkleyici = (secici) => {
+
   // GÖREV 4
   // ---------------------
   // Tek argümanı olarak bir css seçici alan bu işlevi uygulayın.
@@ -23,6 +45,22 @@ const tabEkleyici = (secici) => {
   // Yanıtın içindeki konu dizisini bulun ve Tablar bileşenini kullanarak tabları oluşturun.
   // Tabları, fonksiyona iletilen seçiciyle eşleşen DOM'daki öğeye ekleyin.
   //
-}
+
+  const tabEkleyici = (secici) => {
+    axios
+    .get("http://localhost:5001/api/konular")
+    .then((response)=>{
+      console.log("görev4",response.data.konular);
+
+      const tabSecici = document.querySelector(secici);
+      tabSecici.append(Tablar(response.data.konular));
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+    .finally(()=>{
+
+    });
+  }  
 
 export { Tablar, tabEkleyici }
